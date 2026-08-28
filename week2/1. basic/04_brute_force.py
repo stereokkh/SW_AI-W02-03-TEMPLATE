@@ -37,8 +37,13 @@ def find_two_sum_pairs(nums, target):
     Returns:
         list: (i, j) 인덱스 쌍의 리스트
     """
-    pairs = []
     n = len(nums)
+    pairs = []
+    for i in range(n-1): 
+        for j in range(i+1, n, 1):
+            if nums[j] + nums[i] == target:
+                pairs.append((i,j))
+    return [data for data in pairs]
     
     # TODO: 이중 반복문으로 모든 쌍을 확인하세요
     ## 외부 반복문: i는 0부터 n-1까지

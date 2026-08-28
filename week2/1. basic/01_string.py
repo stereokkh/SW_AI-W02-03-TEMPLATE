@@ -23,6 +23,12 @@
 - 알파벳과 숫자만 남기고 소문자로 변환하세요
 - 문자열을 뒤집어서 비교하거나, 양 끝에서 시작해 중앙으로 이동하며 비교하세요
 """
+def stirng_conv(s) -> list:
+    letter = []
+    for c in s:
+        if c.isalnum():
+            letter.append(c.lower())
+    return letter
 
 def is_palindrome(s):
     """
@@ -34,6 +40,13 @@ def is_palindrome(s):
     Returns:
         bool: 회문이면 True, 아니면 False
     """
+    is_pal = stirng_conv(s)
+    for i in range(len(is_pal) // 2):
+        if is_pal[i] != is_pal[len(is_pal)-1-i]:
+            return False
+
+    return True
+    
     # TODO: 알파벳과 숫자만 남기고 소문자로 변환하세요
     # 힌트: isalnum() 메서드와 lower() 메서드 사용
     pass
