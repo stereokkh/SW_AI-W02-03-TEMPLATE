@@ -32,6 +32,8 @@ def merge(arr, left, mid, right):
         mid: 왼쪽 부분의 끝 인덱스
         right: 오른쪽 부분의 끝 인덱스
     """
+
+
     # TODO: 왼쪽과 오른쪽 부분 배열을 임시 배열로 복사
     pass
     
@@ -46,6 +48,8 @@ def merge(arr, left, mid, right):
     # left_arr에 남은 원소가 있으면 복사
     # right_arr에 남은 원소가 있으면 복사
     pass
+
+
 
 def merge_sort_helper(arr, left, right):
     """
@@ -63,6 +67,42 @@ def merge_sort_helper(arr, left, right):
     ## 정렬된 두 절반을 병합
     pass
 
+def merge_sort_mine(arr, left, right):
+    mid = (left+right)//2
+    if left >= right:        
+        return
+
+    merge_sort_mine(arr, left, mid)
+    merge_sort_mine(arr, mid+1, right)
+
+    
+    merge(arr, left, mid, right)
+
+    return
+
+
+
+def merge(arr, left, mid, right):
+    pl, pr = 0, 0
+    arr_s = []
+
+    while True:
+        if left + pl > mid:
+            arr_s.extend(arr[mid + 1 + pr:right+1])
+            break
+        if mid + pr + 1 > right:
+            arr_s.extend(arr[left+pl : mid+1])
+            break
+        if arr[left + pl] < arr[mid + 1 + pr]:
+            arr_s.append(arr[left+pl])
+            pl += 1
+
+        else:
+            arr_s.append(arr[mid + pr +1])
+            pr += 1
+    arr[left: right+1] = arr_s
+    return
+
 def merge_sort(arr):
     """
     머지 정렬 메인 함수
@@ -74,7 +114,8 @@ def merge_sort(arr):
         정렬된 배열
     """
     if len(arr) > 1:
-        merge_sort_helper(arr, 0, len(arr) - 1)
+        merge_sort_mine(arr, 0 , len(arr) -1)
+        #merge_sort_helper(arr, 0, len(arr) - 1)
     return arr
 
 # 테스트 케이스

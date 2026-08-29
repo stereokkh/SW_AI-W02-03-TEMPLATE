@@ -34,6 +34,23 @@ def partition(arr, low, high):
     Returns:
         피벗의 최종 위치 인덱스
     """
+    pivot_num = arr[(high + low)//2]
+    left_p, right_p = low, high
+    while left_p <= right_p:
+        while arr[left_p] < pivot_num:
+            left_p += 1
+        while arr[right_p] > pivot_num:
+            right_p -= 1
+        if left_p <= right_p:
+            arr[left_p], arr[right_p] = arr[right_p], arr[left_p]
+            left_p += 1
+            right_p -= 1
+    if low < right_p:
+            partition(arr, low, right_p)
+    if left_p < high:
+            partition(arr, left_p, high)
+    
+    return arr
     # TODO: 피벗을 선택 (일반적으로 마지막 원소)
     pass
     
@@ -77,7 +94,8 @@ def quick_sort(arr):
     Returns:
         정렬된 배열
     """
-    quick_sort_helper(arr, 0, len(arr) - 1)
+    #quick_sort_helper(arr, 0, len(arr) - 1)
+    partition(arr, 0, len(arr) - 1)
     return arr
 
 # 테스트 케이스
@@ -87,6 +105,8 @@ if __name__ == "__main__":
     print("=== 테스트 케이스 1 ===")
     print(f"정렬 전: {arr1}")
     result1 = quick_sort(arr1.copy())
+    result1 = quick_sort(arr1.copy())
+    
     print(f"정렬 후: {result1}")
     print()
     
