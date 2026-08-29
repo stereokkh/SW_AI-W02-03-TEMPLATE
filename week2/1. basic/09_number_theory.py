@@ -100,12 +100,13 @@ def extended_gcd(a, b):
     
     # recursive case
     # 역추적하며 x, y 계산
-    
     if b == 0:
         x = 1
         y = 0
         return a,1,0
+    
     gcd, x, y = extended_gcd(b, a%b)
+
     return gcd, y, x-(a//b)*y 
     
     

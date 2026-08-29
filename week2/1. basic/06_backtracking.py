@@ -127,11 +127,13 @@ def combinations(n: int, k: int) -> list:
 
         if start == n+1:
             return
+        
         current_combination.append(start)
         backtrack(start+1, current_combination)
         current_combination.pop()
 
-        
+        ##backtrack(start + 1, current_combination + [start])
+        ##backtrack(start + 1, current_combination)
         
 
         return backtrack(start+1, current_combination)

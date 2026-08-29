@@ -35,6 +35,17 @@ def find_max_divide_conquer(arr, left, right):
     Returns:
         최댓값
     """
+    if (right - left) == 0:
+        return arr[left]
+    
+    middle = (left + right)//2
+
+    left_max, right_max = find_max_divide_conquer(arr, left, middle), find_max_divide_conquer(arr, middle+1, right)
+
+    if left_max > right_max:
+        return left_max
+    else:
+        return right_max
     # TODO: base case - 원소가 하나면 그 값 반환
     pass
     

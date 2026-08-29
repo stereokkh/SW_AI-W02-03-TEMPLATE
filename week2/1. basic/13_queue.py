@@ -38,8 +38,14 @@ def process_print_queue(jobs):
     """
     # TODO: deque로 큐 생성
     queue = deque(jobs)
+   
+        
     
     processed = []
+    while queue:
+        result = queue.popleft()
+        print("처리: " + result)
+        processed.append(result)
     
     # TODO: 큐가 비어있지 않은 동안 반복
     ## 큐에서 작업 꺼내기

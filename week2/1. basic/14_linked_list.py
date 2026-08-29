@@ -99,6 +99,8 @@ class Node:
         │ data │ next │ ──▶ (다른 Node 또는 None)
         └──────┴──────┘
     """
+    data : int
+    next : None
     def __init__(self, data):
         self.data = data
         self.next = None
@@ -110,6 +112,7 @@ class LinkedList:
 
         head ──▶ [data|next] ──▶ [data|next] ──▶ ... ──▶ [data|None]
     """
+
     def __init__(self):
         self.head = None
 
@@ -128,6 +131,20 @@ class LinkedList:
               head ─▶ [1|●]─▶[2|●]─▶[7|None]
         """
         new_node = Node(data)
+        current = self.head
+        if self.head == None:
+            self.head = new_node
+            current = self.head
+            return
+        else :
+            while current.next != None:
+                current = current.next
+            current.next = new_node
+        return 
+
+
+            
+
 
         # ─── Level 1: 리스트가 비어 있는 경우 ────────────────────────
         # 힌트: self.head 가 None 이면, head 에 new_node 를 바로 꽂고 return.
@@ -157,7 +174,11 @@ class LinkedList:
 
         예: head ─▶ [10|●]─▶[20|●]─▶[30|None]  →  [10, 20, 30]
         """
+        current = self.head
         values = []
+        while current:
+            values.append(current.data)
+            current = current.next
 
         # ─── Level 1: 시작 위치 ─────────────────────────────────────
         # current 라는 "이동용 변수" 를 head 에서 시작시킵니다.
