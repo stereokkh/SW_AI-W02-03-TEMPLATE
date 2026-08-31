@@ -69,6 +69,36 @@ def n_queens(n: int) -> int:
     #   place(0)
     #   return count
     pass
+    arr = []
+    cnt = 0
+    cnt = make_arr(n, n, arr)
+    return cnt
+
+
+def make_arr(k, m, arr:list):
+    if k == 0:
+        return 1
+    cnt = 0
+    
+
+    for i in range(m):
+        if check_can_put(arr, i):
+            arr.append(i)
+            cnt += make_arr(k-1, m, arr)
+            arr.pop()
+    
+    return cnt
+
+def check_can_put(arr, i):
+    cnt = 1
+    for back in range(len(arr)-1, -1, -1):
+        if i == arr[back]:#-체크
+            return False
+        if cnt == abs(i - arr[back]):#\체크
+            return False
+        cnt += 1
+    return True
+    
 
 
 if __name__ == "__main__":
