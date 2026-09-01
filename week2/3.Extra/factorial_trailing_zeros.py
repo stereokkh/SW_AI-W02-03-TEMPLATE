@@ -14,4 +14,3 @@ class Solution:
         if k == 0:
             return 1
         return n*self.power(n, k-1)
-        
