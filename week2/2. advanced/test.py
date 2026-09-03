@@ -25,5 +25,14 @@ row_check
 
 
     
+"""
+f(n,sum) = n* 10
+"""
 
+def sum(k, n=0):
+    if k == 0:
+        return n
+    n += 10
+    return sum(k-1, n)
 
+print(sum(4))
