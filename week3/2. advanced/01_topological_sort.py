@@ -47,8 +47,30 @@ def topological_sort(vertices, edges):
     
     # TODO: 진입 차수가 0인 정점들을 큐에 추가
     pass
-    
+    degrees = {i : 0 for i in range(vertices) }
+    queue = []
     result = []
+
+    for edge_at, edge_to in edges:
+        degrees[edge_to] = degrees.get(edge_to, 0) + 1
+
+    for key, degree in degrees.items():
+        if degree == 0:
+            queue.append(key)
+
+    while queue:
+        v = queue.pop(0)
+        for edge_at, edge_to in edges:
+            if edge_at == v:
+                degrees[edge_to] -= 1
+                if degrees[edge_to] == 0:                 
+                    queue.append(edge_to)
+        result.append(v)
+
+    
+    
+    
+
     
     # TODO: 큐가 빌 때까지 반복
     ## 큐에서 정점 꺼내기

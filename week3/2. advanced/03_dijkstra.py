@@ -80,6 +80,32 @@ def dijkstra(n: int, edges: list, start: int) -> list:
     # TODO: 우선순위 큐(heapq)로 BFS-like 최단경로 탐색
     # TODO: dist 반환
     pass
+    graph = {i : [] for i in range(n)}
+    dist = [INF]*n
+    dist[start] = 0
+    hq = [(0, start)]
+
+    #처음 세팅 시작값 받아서 간선 확인 
+    for edge_s, edge_e, edge_w in edges: #인접리스트 구현
+        graph[edge_s].append((edge_e, edge_w))
+
+    while hq:
+        w, x = heapq.heappop(hq)
+        if w > dist[x]: continue
+        for i,j in graph[x]: #인접 리스트에서 연결된 간선 모두 찾아서 heap에 넣기
+            new_dist = w + j
+            if new_dist < dist[i]:
+                dist[i] = new_dist
+                heapq.heappush(hq, (new_dist, i))# 간선 가중치 + 노드 가중치
+        #가장 작은거 뽑아서 x에 넣기
+        #dist list 갱신
+    return dist
+
+    
+
+
+    
+
 
 
 def _format(dist):
