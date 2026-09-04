@@ -22,7 +22,7 @@
 - 이전 회의가 끝난 후에 시작하는 회의만 선택
 """
 
-def select_meetings(meetings):
+def select_meetings(meetings :tuple):
     """
     회의실 배정 (그리디)
     
@@ -39,6 +39,14 @@ def select_meetings(meetings):
     pass
     
     selected = []
+    meetings.sort(key=lambda x :x[1])
+    for meeting in meetings:
+        if not selected:
+            selected.append(meeting)
+        else:
+            if meeting[0] >= selected[-1][1]:
+                selected.append(meeting)
+    
     
     # TODO: 첫 번째 회의 선택
     pass

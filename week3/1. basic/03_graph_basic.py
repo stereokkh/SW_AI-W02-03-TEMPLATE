@@ -28,7 +28,7 @@
 - 무방향 그래프는 양방향 추가
 """
 
-def create_graph(vertices, edges, directed=False):
+def create_graph(vertices : NotImplementedError, edges, directed=False):
     """
     그래프 생성 (인접 리스트)
     
@@ -47,7 +47,16 @@ def create_graph(vertices, edges, directed=False):
     ## 간선 추가 (u에서 v로)
     ## 무방향 그래프면 반대 방향도 추가
     pass
-    
+    graph = {i : [] for i in range(vertices)}
+    if directed:
+        for to, where in edges:
+            graph[to].append(where)
+    else:
+         for to, where in edges:
+            graph[to].append(where)
+            graph[where].append(to)
+
+        
     return graph
 
 # 테스트 케이스

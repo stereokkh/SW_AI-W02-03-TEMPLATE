@@ -92,8 +92,23 @@ def fibonacci_memo(n, memo=None):
     
     # TODO: 재귀 호출하여 계산하고 memo에 저장
     pass
+    if memo is None:
+        memo = {}
+    if n <=1:
+        memo[n]= n
+        return n
+    if n == 2:
+        memo[2] = 1
+        return 1
+    if n in memo:
+        return memo[n]
+    add1 = fibonacci_memo(n-1, memo)
+    add2 = fibonacci_memo(n-2, memo)
+    add = add1 + add2 
+    memo[n] = add
     
-    return memo[n]
+    return add
+
 
 # 테스트 케이스
 if __name__ == "__main__":

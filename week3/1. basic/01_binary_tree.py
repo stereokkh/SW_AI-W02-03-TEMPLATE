@@ -39,7 +39,7 @@ class TreeNode:
         self.left = None
         self.right = None
 
-def preorder(root):
+def preorder(root : TreeNode):
     """전위 순회: 루트 → 왼쪽 → 오른쪽"""
     result = []
     
@@ -54,10 +54,15 @@ def preorder(root):
     
     # TODO: 오른쪽 서브트리 순회
     pass
-    
+    if root == None:
+        return []
+
+    result.append(root.value)
+    result += preorder(root.left)
+    result += preorder(root.right)
     return result
 
-def inorder(root):
+def inorder(root : TreeNode):
     """중위 순회: 왼쪽 → 루트 → 오른쪽"""
     result = []
     
@@ -72,6 +77,11 @@ def inorder(root):
     
     # TODO: 오른쪽 서브트리 순회
     pass
+    if root is None:
+        return []
+    result += inorder(root.left)
+    result.append(root.value)
+    result += inorder(root.right)
     
     return result
 
@@ -90,7 +100,12 @@ def postorder(root):
     
     # TODO: 루트 값 추가
     pass
-    
+    if root == None:
+            return []
+        
+    result += postorder(root.left)
+    result += postorder(root.right)
+    result.append(root.value)
     return result
 
 # 테스트 케이스

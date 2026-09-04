@@ -54,8 +54,18 @@ def climb_stairs(n):
     
     # TODO: 작은 문제부터 차례로 계산
     pass
-    
-    return dp[n]
+
+    dp = {}
+    if n <= 2:
+        dp[n] = n
+        return n
+    if n in dp:
+        return dp[n]
+    add1 = climb_stairs(n-1)
+    add2 = climb_stairs(n-2)
+    add = add1+ add2
+    dp[n] = add
+    return add
 
 # 테스트 케이스
 if __name__ == "__main__":
