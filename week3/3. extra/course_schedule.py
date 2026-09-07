@@ -1,36 +1,30 @@
-# Definition for a binary tree node.
-from collections import deque
-
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
 class Solution:
-    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        list = []
-        queue = deque()
-        def bfs(point):
-            if point == None:
-                return []
-            list.append([])
-            list[0].append(point.val)
-            if point.left != None:
-                queue.append(point.left)
-            if point.right != None:
-                queue.append(point.right)      
-            
-            while queue:
-                level = len(queue)
-                list.append([])
-                for _ in range(level):
-                    current = queue.popleft()
-                    list[-1].append(current.val)
-                    if current.left != None:
-                        queue.append(current.left)
-                    if current.right != None:
-                        queue.append(current.right)
-            return
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        dict = {i :[] for i in range(numCourses)}
+        visited = {i : 0 for i in range(len(dict))}
+        cycle = True
+        for i, j in prerequisites:
+            dict[i].append(j)
 
-        bfs(root)
-        return list
+        
+        def dfs(point):
+            nonlocal cycle
+            if visited[point] == 0:
+                visited[point] = 1
+            elif visited[point] == 1:
+                cycle = False
+                return
+            else:
+                return
+            
+            for i in dict[point]:
+                dfs(i)
+            visited[point] = 2
+        for i in range(len(dict)):
+            if visited[i] != 2:
+                dfs(i)
+        return cycle
+
+
+
+

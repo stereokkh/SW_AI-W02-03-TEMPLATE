@@ -1,0 +1,9 @@
+import string
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        dic = {beginWord :[], wordList:[]}
+        for i in wordList:
+            dic[i] = []
+        
+
+        
