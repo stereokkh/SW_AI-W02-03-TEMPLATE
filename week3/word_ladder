@@ -1,9 +1,59 @@
-import string
+from collections import deque
 class Solution:
-    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        dic = {beginWord :[], wordList:[]}
+    def ladderLength(self, beginWord: str, endWord: str, wordList) -> int:
+        if endWord == beginWord:
+            return 0
+        word_set = set(wordList)
+
+        graph = {beginWord :set(), endWord:set()}
+
         for i in wordList:
-            dic[i] = []
-        
+            graph[i] = set()
+            
+        for i in graph:
+            for word_index in range(len(i)): #index 0~n
+                for char in range(ord('a'), ord('z') + 1):
+                    possible_next_word = i[:word_index] + chr(char) + i[word_index+1:]
+                    if possible_next_word in word_set:
+                        graph[i].add(possible_next_word)
+                graph[i].discard(i)
+
+        def bfs(graph, beginWord, endWord = endWord):
+                visited = set()
+                queue = deque()
+                
+                queue.append(beginWord)
+                visited.add(beginWord)
+                level = 1
+                find = False
+                
+                level_limit = len(queue)
+                while queue:
+                    
+                    if level_limit == 0:
+                        level += 1
+                        level_limit = len(queue)
+                    s = queue.popleft()
+                    level_limit -= 1
+
+                    for i in graph[s]:
+                        if i in visited:
+                            continue
+                        queue.append(i)
+                        if endWord == i:
+                            find = True
+                            level += 1
+                            break
+                        visited.add(i)
+                    if find:
+                        return level
+                return 0
+                    
+                
+                
+
 
         
+        return bfs(graph, beginWord)
+    
+    
