@@ -1,23 +1,19 @@
 class Solution:
-    def ladderLength(self, beginWord: str, endWord: str, wordList) -> int:
-        word_set = set(wordList)
-
-        dic = {beginWord :set(), endWord:set()}
-
-        for i in wordList:
-            dic[i] = set()
-            
-        for i in dic:
-            for word_index in range(len(i)): #index 0~n
-                for char in range(ord('a'), ord('z') + 1):
-                    possible_next_word = i[:word_index] + chr(char) + i[word_index+1:]
-                    if possible_next_word in word_set:
-                        dic[i].add(possible_next_word)
-                dic[i].discard(i)
-        return dic
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        dp = [0]*n
+        dp[0] = 0
+        dp[1] = nums[1]
+        for i in range(2, n):
+            dp[i] = max(dp[i-1], dp[i-2] + nums[i])
+        return dp[n-1]
 
 if __name__ == "__main__":
-    a = Solution()
-    dic = a.ladderLength("cat", "eat", ["met", "rat", "ctt", "cal", "ret"])
 
-    print(dic)
+    num = [1,1,2,3,4,4,5,]
+    num = set(num)
+    for i in letter:
+        print(i)
+
+    
+    
